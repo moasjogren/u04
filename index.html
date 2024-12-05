@@ -7,9 +7,35 @@
     <title>Document</title>
   </head>
   <body>
+    <header class="header">
+      <img class="header-logo" src="./img/logo_cart.png" alt="logo" />
+      <nav class="nav">
+        <a href="./cart.html"
+          ><img src="./img/shopping_cart_checkout_24dp_5F6368_FILL0_wght400_GRAD0_opsz24.svg" alt=""
+        /></a>
+        <p class="cart-counter">0</p>
+      </nav>
+    </header>
+    <aside class="aside">
+      <div class="checkbox">
+        <label for="mens-clothing">Men's clothing</label>
+        <input value="men's clothing" id="mens-clothing" type="checkbox" />
+      </div>
+      <div class="checkbox">
+        <label for="womens-clothing">Women's clothing</label>
+        <input value="women's clothing" id="womens-clothing" type="checkbox" />
+      </div>
+      <div class="checkbox">
+        <label for="jewelery">Jewelery</label>
+        <input value="jewelery" id="jewelery" type="checkbox" />
+      </div>
+      <div class="checkbox">
+        <label for="electronics">Electronics</label>
+        <input value="electronics" id="electronics" type="checkbox" />
+      </div>
+      <button id="filter-button" class="filter-button">Filter</button>
+    </aside>
     <main id="main-container" class="main-container"></main>
     <script src="js/index.js"></script>
-
-
   </body>
 </html>
