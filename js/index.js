@@ -24,10 +24,16 @@ async function getProducts() {
       throw new Error("HTTP" + response.status);
     }
     const data = await response.json();
-
-    showAll = data.filter((item) => {
-      filteredCategorys.includes(item.category);
+    filteredCategorys.forEach((filter) => {
+      data.filter((item) => {
+        if (item.category === filter) {
+          return (showAll = item);
+        }
+      });
     });
+
+    // return item.category.includes(filteredCategorys);
+
     console.log(showAll);
     if (showAll.length !== 0) {
       displayProducts(showAll);
