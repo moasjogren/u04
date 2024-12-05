@@ -24,13 +24,10 @@ async function getProducts() {
       throw new Error("HTTP" + response.status);
     }
     const data = await response.json();
-    filteredCategorys.forEach((filter) => {
-      data.filter((item) => {
-        if (item.category === filter) {
-          return (showAll = item);
-        }
-      });
-    });
+
+      showAll = data.filter(obj => filteredCategorys.includes(obj.category));
+    
+   
 
     // return item.category.includes(filteredCategorys);
 
@@ -49,7 +46,8 @@ getProducts();
 
 function displayProducts(data) {
   mainContainer.innerHTML = "";
-  const products = data.map((product) => {
+  filteredCategorys = [];
+   data.map((product) => {
     let limitedText = product.description.substring(0, 100);
     let limitedTitle = product.title.substring(0, 60);
     const card = document.createElement("div");
