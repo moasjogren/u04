@@ -26,14 +26,15 @@ async function getProducts() {
     //data.forEach
     console.log(data[1])
     const products = data.map((product) => {
- 
+  let limitedText = product.description.substring(0,100)
+  let limitedTitle = product.title.substring(0,60)
     const card = document.createElement("div")
     card.innerHTML = `
         <div id="card" class="card">
    <div class="card-image"> <img class="image" src="${product.image}" alt=""></div>
    <section class="card-text">
-    <h3 class="card-title" >${product.title}</h3>
-    <p class="card-description" >${product.description}</p>
+    <h3 class="card-title" >${limitedTitle}</h3>
+    <p class="card-description" >${limitedText}...</p>
   
    </section>
    <footer class="card-footer">
