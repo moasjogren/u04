@@ -9,6 +9,10 @@
   padding: 0;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
   font-family: Rubik;
 }
@@ -46,15 +50,31 @@ body {
     box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
 }
 
+.cart-logo {
+    width: 30px;
+    height: 30px;
+}
+
 .aside {
   display: flex;
   justify-content: space-evenly;
-  gap: 20px;
+  gap: 30px;
   flex-wrap: wrap;
-  padding: 20px;
+  padding: 20px 30px;
   border-radius: 0 0 10px 10px;
   background-color: #efefef;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+
+.checkbox {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.checkbox input {
+    width: 15px;
+    height: 15px;
 }
 
 .filter-button {
@@ -86,7 +106,7 @@ body {
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 400px;
+  height: 500px;
   border-radius: 15px;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 }
@@ -111,6 +131,10 @@ body {
     align-self: center;
 }
 
+.card-title {
+    margin-bottom: 10px;
+}
+
 .card-footer {
   position: absolute;
   bottom: 0;
@@ -119,6 +143,7 @@ body {
   justify-content: space-between;
   align-self: center;
   align-items: center;
+  gap: 10px;
 
   padding: 20px 30px;
   width: 100%;
@@ -141,23 +166,61 @@ body {
 }
 
 .card-button:hover {
-background-color: rgb(255, 251, 0);
-box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+    background-color: rgb(255, 251, 0);
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
 }
 
-@media (min-width: 600px) {
+.back-to-top {
+    all: unset;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    margin: 40px;
+    padding: 10px 20px;
+    border-radius: 50%;
+    background-color: #c4e9a2;
+    box-shadow: rgba(133, 215, 106, 0.4) 0px 5px, rgba(133, 215, 106, 0.3) 0px 10px, rgba(133, 215, 106, 0.2) 0px 15px, rgba(133, 215, 106, 0.1) 0px 20px, rgba(133, 215, 106, 0.05) 0px 25px;
+    transition: 0.3s;
+}
+
+.back-to-top:hover{
+    background-color: rgb(133, 215, 106);
+}
+
+.back-to-top a {
+    text-decoration: none;
+    color: #11240b;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.page-footer {
+    text-align: center;
+    padding: 15px 0;
+    background-color: rgb(133, 215, 106);
+    color: #11240b;
+    margin-top: 20px;
+}
+
+@media (min-width: 650px) {
     .main-container {
         grid-template-columns: 1fr 1fr;
-        margin: 0 0;
-    }
-
-    .card {
-        height: 450px;
     }
 }
 
 @media (min-width: 1024px) {
     .main-container {
         grid-template-columns: 1fr 1fr 1fr;
+        margin: 20px 50px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .main-container {
+        margin: 20px 100px;
+    }
+
+    .aside {
+        padding: 20px 60px;
     }
 }
