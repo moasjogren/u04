@@ -1,11 +1,11 @@
 const mainContainer = document.getElementById("main-container");
 const filterButton = document.getElementById("filter-button");
+const body = document.getElementById("body");
 let showAll = [];
-let mensClothing = [];
-let womensClothing = [];
-let jewelery = [];
-let electronics = [];
 let filteredCategorys = [];
+const modal = document.querySelector(".modal");
+const openCard = document.getElementById("card");
+let cardValue;
 
 filterButton.addEventListener("click", function () {
   document.querySelectorAll("input").forEach((item) => {
@@ -25,9 +25,7 @@ async function getProducts() {
     }
     const data = await response.json();
 
-      showAll = data.filter(obj => filteredCategorys.includes(obj.category));
-    
-   
+    showAll = data.filter((obj) => filteredCategorys.includes(obj.category));
 
     // return item.category.includes(filteredCategorys);
 
@@ -47,12 +45,12 @@ getProducts();
 function displayProducts(data) {
   mainContainer.innerHTML = "";
   filteredCategorys = [];
-   data.map((product) => {
+  data.map((product) => {
     let limitedText = product.description.substring(0, 100);
     let limitedTitle = product.title.substring(0, 60);
     const card = document.createElement("div");
     card.innerHTML = `
-        <div id="card" class="card">
+        <div value=${product.id} id="card" class="card">
    <div class="card-image"> <img class="image" src="${product.image}" alt=""></div>
    <section class="card-text">
     <h3 class="card-title" >${limitedTitle}</h3>
@@ -63,9 +61,28 @@ function displayProducts(data) {
     <button class="card-button" >Add to cart +</button>
    </footer>
     </div>
-    `;
+`;
     mainContainer.appendChild(card);
   });
-}
 
-// checked: true
+  mainContainer.addEventListener("click", function (event) {
+    const cardElement = event.target.closest(".card");
+    if (cardElement) {
+      modal.classList.add("modal-show");
+      cardValue = cardElement.getAttribute("value");
+      console.log(cardValue);
+    }
+
+    data.map((product) => {
+      if (product.id == cardValue) {
+        const modalContent = document.createElement("div");
+        modalContent.innerHTML = `<div id="modal-content" class="modal-content">
+        <h3>${product.title}</h3>
+            <p>${product.description}</p>
+            <button class="close-modal">Close</button>
+          </div>`;
+        modal.appendChild(modalContent);
+      }
+    });
+  });
+}
