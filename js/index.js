@@ -25,9 +25,12 @@ async function getProducts() {
     }
     const data = await response.json();
 
-    showAll = data.filter((item) => {
-      filteredCategorys.includes(item.category);
-    });
+      showAll = data.filter(obj => filteredCategorys.includes(obj.category));
+    
+   
+
+    // return item.category.includes(filteredCategorys);
+
     console.log(showAll);
     if (showAll.length !== 0) {
       displayProducts(showAll);
@@ -43,7 +46,8 @@ getProducts();
 
 function displayProducts(data) {
   mainContainer.innerHTML = "";
-  const products = data.map((product) => {
+  filteredCategorys = [];
+   data.map((product) => {
     let limitedText = product.description.substring(0, 100);
     let limitedTitle = product.title.substring(0, 60);
     const card = document.createElement("div");
@@ -56,7 +60,7 @@ function displayProducts(data) {
    </section>
    <footer class="card-footer">
     <p class="card-price">$${product.price}</p>
-    <button class="card-button" >Add to cart +</button>
+    <button class="card-button" >Add to cart</button>
    </footer>
     </div>
     `;
