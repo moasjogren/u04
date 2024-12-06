@@ -58,7 +58,7 @@ function displayProducts(data) {
    </section>
    <footer class="card-footer">
     <p class="card-price">$${product.price}</p>
-    <button class="card-button" >Add to cart +</button>
+    <button class="card-button" >Add to cart</button>
    </footer>
     </div>
 `;
