@@ -1,7 +1,16 @@
+@font-face {
+  font-family: Rubik;
+  src: url("../fonts/Rubik-VariableFont_wght.ttf");
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+body {
+  font-family: Rubik;
 }
 
 .header {
