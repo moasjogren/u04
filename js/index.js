@@ -6,6 +6,7 @@ let filteredCategorys = [];
 const modal = document.querySelector(".modal");
 const openCard = document.getElementById("card");
 let cardValue;
+const modalContent = document.createElement("div");
 
 filterButton.addEventListener("click", function () {
   document.querySelectorAll("input").forEach((item) => {
@@ -70,18 +71,26 @@ function displayProducts(data) {
     if (cardElement) {
       modal.classList.add("modal-show");
       cardValue = cardElement.getAttribute("value");
-      console.log(cardValue);
     }
 
     data.map((product) => {
       if (product.id == cardValue) {
-        const modalContent = document.createElement("div");
         modalContent.innerHTML = `<div id="modal-content" class="modal-content">
         <h3>${product.title}</h3>
             <p>${product.description}</p>
             <button class="close-modal">Close</button>
           </div>`;
         modal.appendChild(modalContent);
+      }
+    });
+
+    body.addEventListener("click", function (event) {
+      if (event.target && event.target.closest(".close-modal")) {
+        modal.classList.remove("modal-show");
+        modalContent.innerHTML = "";
+      } else if (event.target && event.target.closest(".modal")) {
+        modal.classList.remove("modal-show");
+        modalContent.innerHTML = "";
       }
     });
   });
