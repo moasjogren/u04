@@ -61,126 +61,7 @@ body {
   height: 30px;
 }
 
-.aside {
-  display: flex;
-  justify-content: space-evenly;
-  gap: 30px;
-  flex-wrap: wrap;
-  padding: 20px 30px;
-  border-radius: 0 0 10px 10px;
-  background-color: #efefef;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-}
-
-.checkbox {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.checkbox input {
-  width: 15px;
-  height: 15px;
-}
-
-.filter-button {
-  all: unset;
-  padding: 5px 15px;
-  border-radius: 5px;
-  color: #11240b;
-  font-weight: 600;
-  background-color: #c4e9a2;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.filter-button:hover {
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
-}
-
-.main-container {
-  display: grid;
-  grid-template-columns: 1fr;
-  justify-content: center;
-  gap: 20px;
-  padding: 20px;
-}
-
-.card {
-  position: relative;
-  padding: 15px;
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: 500px;
-  border-radius: 15px;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-}
-
-.card:hover {
-  cursor: pointer;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
-}
-
-.card-image {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  height: 50%;
-}
-
-.image {
-  padding: 20px;
-  width: 200px;
-  object-fit: contain;
-}
-
-.card-text {
-  position: absolute;
-  bottom: 0;
-  padding: 80px 20px;
-  align-self: center;
-}
-
-.card-title {
-  margin-bottom: 10px;
-}
-
-.card-footer {
-  position: absolute;
-  bottom: 0;
-
-  display: flex;
-  justify-content: space-between;
-  align-self: center;
-  align-items: center;
-  gap: 10px;
-
-  padding: 20px 30px;
-  width: 100%;
-}
-
-.card-price {
-  font-size: 20px;
-  font-weight: bold;
-}
-
-.card-button {
-  all: unset;
-  font-size: 18px;
-  background-color: rgb(255, 253, 107);
-  padding: 10px 15px;
-  border-radius: 10px;
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.card-button:hover {
-  background-color: rgb(255, 251, 0);
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
-}
-
+/* Sparar de här ifall vi vill lägga till back to top-knappen på den här sidan */
 .back-to-top {
   all: unset;
   position: fixed;
@@ -205,67 +86,9 @@ body {
   font-size: 30px;
   font-weight: bold;
 }
+/* ------------------------ */
 
-.page-footer {
-  text-align: center;
-  padding: 15px 0;
-  background-color: rgb(133, 215, 106);
-  color: #11240b;
-  margin-top: 20px;
-}
-
-@media (min-width: 650px) {
-  .main-container {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
-.modal {
-  display: none;
-}
-
-.modal-show {
-  display: block;
-  position: fixed;
-  z-index: 1;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-}
-
-.modal-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
-  background-color: #fff;
-  margin: 15% auto;
-  padding: 2rem;
-  width: 50rem;
-  height: 20rem;
-  border-radius: 1.5rem;
-}
-
-@media (min-width: 1024px) {
-  .main-container {
-    grid-template-columns: 1fr 1fr 1fr;
-    margin: 20px 50px;
-  }
-}
-
-@media (min-width: 1200px) {
-  .main-container {
-    margin: 20px 100px;
-  }
-
-  .aside {
-    padding: 20px 60px;
-  }
-}
-
------------------------------------ .checkoutcontainer-main {
+.checkoutcontainer-main {
   display: grid;
   grid-template-columns: 1fr;
   width: 100%;
@@ -307,70 +130,56 @@ body {
 }
 
 .checkout-button {
-  background-image: linear-gradient(60deg, #67d742, #85d76a, #c4e9a2);
-  width: 100px;
+  background-color: #c4e9a2;
+  width: 150px;
   height: 30px;
-  border-radius: 15px;
-  box-shadow: rgba(55, 93, 50, 0.25) 0px 2px 5px -1px, rgba(18, 17, 17, 0.3) 0px 1px 3px -1px;
+  padding: 5px 15px;
+  border-radius: 5px;
   border: none;
   font-weight: 600;
+}
+
+.checkout-button:hover {
+  cursor: pointer;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+}
+
+.checkout-message {
+  text-align: center;
+  margin-top: 50px;
+  font-weight: 600;
+  font-size: 20px;
+}
+
+.page-footer {
+  text-align: center;
+  padding: 15px 0;
+  background-color: rgb(133, 215, 106);
+  color: #11240b;
+  width: 100%;
 }
 
 @media (min-width: 750px) {
   .checkoutcontainer-main {
     display: grid;
     grid-template-columns: 1fr 1fr;
-  }
-}
     margin: auto;
     margin-top: 20px;
     position: relative;
-    padding: 15px; 
+    padding: 15px;
     width: 90%;
     height: fit-content;
-    border-radius: 15px;
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
   }
-  
-  .checkout-order {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    margin: auto;
-    margin-top: 20px;
-    position: relative;
-    padding: 15px; 
-    width: 90%;
-    height: fit-content;
-    border-radius: 15px;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-  }
-  
-  .parent-button{
+
+  .parent-button {
     width: 100%;
     display: flex;
     justify-content: center;
     margin-top: 30px;
   }
-  
-  .checkout-button{
-    background-image: linear-gradient(60deg, #67d742, #85d76a, #c4e9a2);
-    width: 40%;
-    height: 30px;
-    border-radius: 15px;
-    box-shadow: rgba(55, 93, 50, 0.25) 0px 2px 5px -1px, rgba(18, 17, 17, 0.3) 0px 1px 3px -1px;
-  }
 
-  .checkout-message {
-    text-align: center;
-    margin-top: 50px;
-    font-weight: 600;
-    font-size: 35px;
+  .page-footer {
+    position: absolute;
+    bottom: 0;
   }
-  
-  @media (min-width: 600px) {
-    .checkoutcontainer-main{
-      display: grid;
-      grid-template-columns:  1fr 1fr;
-    }
-  
-  }
+}
