@@ -11,8 +11,10 @@ let cartCounter = 0;
 const cartCount = document.querySelector('.cart-counter');
 
 const shoppingCart = [];
+let test = JSON.parse(localStorage.getItem('shoppingCart'));
 
 
+cartCount.innerText = localStorage.getItem('cartCount');
 
 filterButton.addEventListener("click", function () {
   document.querySelectorAll("input").forEach((item) => {
@@ -124,8 +126,17 @@ function displayProducts(data) {
         
       // });
       
-      cartCounter++
-      cartCount.innerHTML = cartCounter;
+      //cartCounter++
+      //cartCount.innerHTML = cartCounter;
+      
+
+      test = JSON.parse(localStorage.getItem('shoppingCart'));
+      console.log(test.length)
+      
+      localStorage.setItem('cartCount', test.length);
+  
+      cartCount.innerText = localStorage.getItem('cartCount');
+      
     } else if (cardElement) {
       modal.classList.add("modal-show");
       cardValue = cardElement.getAttribute("value");
