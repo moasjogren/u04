@@ -7,6 +7,12 @@ const modal = document.querySelector(".modal");
 const openCard = document.getElementById("card");
 let cardValue;
 const modalContent = document.createElement("div");
+let cartCounter = 0;
+const cartCount = document.querySelector('.cart-counter');
+
+const shoppingCart = [];
+
+
 
 filterButton.addEventListener("click", function () {
   document.querySelectorAll("input").forEach((item) => {
@@ -62,16 +68,69 @@ function displayProducts(data) {
     <button class="card-button" >Add to cart</button>
    </footer>
     </div>
-`;
+  `;
     mainContainer.appendChild(card);
   });
-
   mainContainer.addEventListener("click", function (event) {
     const cardElement = event.target.closest(".card");
-    if (cardElement) {
+    if(event.target.closest(".card-button")){
+
+      const chosenCard = data.filter(product => product.id === Number(event.target.closest(".card").getAttribute("value")))
+      
+      // shoppingCart - tom array som ska  fyllas med objekt
+      // För varje 'add to cart' klick - skapa ett objekt med våra olika keys och pusha in i shoppingCart
+      // spara shoppingCart i localStorage 
+      // ?
+
+      const productInfo = {
+        id: "",
+        title: "",
+        image: "",
+        price: 0
+      }
+  
+      productInfo.id = chosenCard[0].id;
+      productInfo.title = chosenCard[0].title;
+      productInfo.image = chosenCard[0].image;
+      productInfo.price = chosenCard[0].price;
+      
+      shoppingCart.push(productInfo);
+      localStorage.setItem('shoppingCart', JSON.stringify(shoppingCart));
+
+//För att hämta och skriva totalen
+
+    // const shoppingCart = Object.values(localStorage)
+    
+    // const total = shoppingCart.reduce((acc, curr) => {
+    //   const prices = JSON.parse(curr)
+    // return acc + prices.price},0)
+    // console.log(total)
+   ///////////////////////////////////////////
+   
+    
+
+      // const totalPrice = JSON.parse(localStorage).reduce((acc, item) => {return acc + item.price},0 )
+     
+  
+      // let newString = JSON.stringify(valueArray)
+      // .replace(/[ [ () , "-]/g, " ")
+      // .replace("]", " ");
+    /*   localStorage.setItem(chosenCard[0].title, productInfo);
+      localStorage.setItem(chosenCard[0].price, productInfo); */
+      // data.map((product) => {
+      //   if (product.id == document.querySelector(".card").getAttribute("value")) {
+      //     localStorage.setItem(product.id, productInfo);
+      //   };
+        
+      // });
+      
+      cartCounter++
+      cartCount.innerHTML = cartCounter;
+    } else if (cardElement) {
       modal.classList.add("modal-show");
       cardValue = cardElement.getAttribute("value");
-    }
+    } 
+
 
     data.map((product) => {
       if (product.id == cardValue) {
@@ -95,3 +154,4 @@ function displayProducts(data) {
     });
   });
 }
+
