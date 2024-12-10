@@ -143,13 +143,11 @@ body {
 .card-footer {
   position: absolute;
   bottom: 0;
-
   display: flex;
   justify-content: space-between;
   align-self: center;
   align-items: center;
   gap: 10px;
-
   padding: 20px 30px;
   width: 100%;
 }
