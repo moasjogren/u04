@@ -9,7 +9,6 @@ let cardValue;
 const modalContent = document.createElement("div");
 let cartCounter = 0;
 const cartCount = document.querySelector(".cart-counter");
-
 const shoppingCart = [];
 let test = JSON.parse(localStorage.getItem("shoppingCart"));
 
