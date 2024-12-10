@@ -8,13 +8,11 @@ const openCard = document.getElementById("card");
 let cardValue;
 const modalContent = document.createElement("div");
 let cartCounter = 0;
-const cartCount = document.querySelector('.cart-counter');
-
+const cartCount = document.querySelector(".cart-counter");
 const shoppingCart = [];
-let test = JSON.parse(localStorage.getItem('shoppingCart'));
+let test = JSON.parse(localStorage.getItem("shoppingCart"));
 
-
-cartCount.innerText = localStorage.getItem('cartCount');
+cartCount.innerText = localStorage.getItem("cartCount");
 
 filterButton.addEventListener("click", function () {
   document.querySelectorAll("input").forEach((item) => {
@@ -75,81 +73,77 @@ function displayProducts(data) {
   });
   mainContainer.addEventListener("click", function (event) {
     const cardElement = event.target.closest(".card");
-    if(event.target.closest(".card-button")){
+    if (event.target.closest(".card-button")) {
+      const chosenCard = data.filter(
+        (product) => product.id === Number(event.target.closest(".card").getAttribute("value"))
+      );
 
-      const chosenCard = data.filter(product => product.id === Number(event.target.closest(".card").getAttribute("value")))
-      
       // shoppingCart - tom array som ska  fyllas med objekt
       // För varje 'add to cart' klick - skapa ett objekt med våra olika keys och pusha in i shoppingCart
-      // spara shoppingCart i localStorage 
+      // spara shoppingCart i localStorage
       // ?
 
       const productInfo = {
         id: "",
         title: "",
         image: "",
-        price: 0
-      }
-  
+        price: 0,
+      };
+
       productInfo.id = chosenCard[0].id;
       productInfo.title = chosenCard[0].title;
       productInfo.image = chosenCard[0].image;
       productInfo.price = chosenCard[0].price;
-      
+
       shoppingCart.push(productInfo);
-      localStorage.setItem('shoppingCart', JSON.stringify(shoppingCart));
+      localStorage.setItem("shoppingCart", JSON.stringify(shoppingCart));
 
-//För att hämta och skriva totalen
+      //För att hämta och skriva totalen
 
-    // const shoppingCart = Object.values(localStorage)
-    
-    // const total = shoppingCart.reduce((acc, curr) => {
-    //   const prices = JSON.parse(curr)
-    // return acc + prices.price},0)
-    // console.log(total)
-   ///////////////////////////////////////////
-   
-    
+      // const shoppingCart = Object.values(localStorage)
+
+      // const total = shoppingCart.reduce((acc, curr) => {
+      //   const prices = JSON.parse(curr)
+      // return acc + prices.price},0)
+      // console.log(total)
+      ///////////////////////////////////////////
 
       // const totalPrice = JSON.parse(localStorage).reduce((acc, item) => {return acc + item.price},0 )
-     
-  
+
       // let newString = JSON.stringify(valueArray)
       // .replace(/[ [ () , "-]/g, " ")
       // .replace("]", " ");
-    /*   localStorage.setItem(chosenCard[0].title, productInfo);
+      /*   localStorage.setItem(chosenCard[0].title, productInfo);
       localStorage.setItem(chosenCard[0].price, productInfo); */
       // data.map((product) => {
       //   if (product.id == document.querySelector(".card").getAttribute("value")) {
       //     localStorage.setItem(product.id, productInfo);
       //   };
-        
+
       // });
-      
+
       //cartCounter++
       //cartCount.innerHTML = cartCounter;
-      
 
-      test = JSON.parse(localStorage.getItem('shoppingCart'));
-      console.log(test.length)
-      
-      localStorage.setItem('cartCount', test.length);
-  
-      cartCount.innerText = localStorage.getItem('cartCount');
-      
+      test = JSON.parse(localStorage.getItem("shoppingCart"));
+      console.log(test.length);
+
+      localStorage.setItem("cartCount", test.length);
+
+      cartCount.innerText = localStorage.getItem("cartCount");
     } else if (cardElement) {
       modal.classList.add("modal-show");
       cardValue = cardElement.getAttribute("value");
-    } 
-
+    }
 
     data.map((product) => {
       if (product.id == cardValue) {
-        modalContent.innerHTML = `<div id="modal-content" class="modal-content">
+        modalContent.classList.add("modal-content");
+        modalContent.innerHTML = `
         <h3>${product.title}</h3>
             <p>${product.description}</p>
             <button class="close-modal">Close</button>
-          </div>`;
+          `;
         modal.appendChild(modalContent);
       }
     });
@@ -165,4 +159,3 @@ function displayProducts(data) {
     });
   });
 }
-
