@@ -9,8 +9,10 @@ let cardValue;
 const modalContent = document.createElement("div");
 let cartCounter = 0;
 const cartCount = document.querySelector(".cart-counter");
-const shoppingCart = [];
-let test = JSON.parse(localStorage.getItem("shoppingCart"));
+
+const shoppingCart = localStorage.shoppingCart ? JSON.parse(...[localStorage.shoppingCart]): [];
+
+let totalShoppingCart = JSON.parse(localStorage.getItem("shoppingCart"));
 
 cartCount.innerText = localStorage.getItem("cartCount");
 
@@ -125,10 +127,10 @@ function displayProducts(data) {
       //cartCounter++
       //cartCount.innerHTML = cartCounter;
 
-      test = JSON.parse(localStorage.getItem("shoppingCart"));
-      console.log(test.length);
+      totalShoppingCart = JSON.parse(localStorage.getItem("shoppingCart"));
+      console.log(totalShoppingCart.length);
 
-      localStorage.setItem("cartCount", test.length);
+      localStorage.setItem("cartCount", totalShoppingCart.length);
 
       cartCount.innerText = localStorage.getItem("cartCount");
     } else if (cardElement) {
