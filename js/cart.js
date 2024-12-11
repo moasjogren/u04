@@ -49,10 +49,4 @@ function displayShoppingCart() {
 displayShoppingCart();
 
 
-const products = JSON.parse(data);
-
-const totatlPrice = products.reduce((acc, product) => acc + product.price,0)
-console.log(totatlPrice)
-const totalPrices = document.getElementById("total-price")
-totalPrices.innerHTML = `$${totatlPrice}`
 

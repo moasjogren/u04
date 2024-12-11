@@ -6,7 +6,6 @@
     <link rel="stylesheet" href="./css/base.css" />
     <title>Document</title>
   </head>
-
   <body id="body">
     <header class="header" id="header">
       <a href="./index.html"><img class="header-logo" src="./img/logo_cart.png" alt="logo" /></a>
@@ -35,13 +34,13 @@
         <input value="electronics" id="electronics" type="checkbox" />
       </div>
       <button id="filter-button" class="filter-button">Filter</button>
-
-      <div>
-        <label for="sort-by-price">Sort by price range</label>
+      <div id="price-filter-div">
+        <label for="price-range">Sort by price range</label>
         <select name="price range" id="price-range">
-          <option value="" disabled selected hidden>Select...</option>
-          <option value="low-to-high">Lowest to highest</option>
-          <option value="high-to-low">Highest to lowest</option>
+          <option id="select" value="" disabled>Select...</option>
+          <option id="low-to-high" value="low-to-high">Lowest to highest</option>
+          <option id="high-to-low" value="high-to-low">Highest to lowest</option>
+          </select>
       </div>
     </aside>
     <main id="main-container" class="main-container"></main>
