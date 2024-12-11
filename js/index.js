@@ -9,12 +9,9 @@ let cardValue;
 const modalContent = document.createElement("div");
 let cartCounter = 0;
 const cartCount = document.querySelector(".cart-counter");
-const cartLogo = document.querySelector(".cart-logo")
+const cartLogo = document.querySelector(".cart-logo");
 
-
-const shoppingCart = localStorage.shoppingCart
-  ? [...JSON.parse(localStorage.shoppingCart)]
-  : [];
+const shoppingCart = localStorage.shoppingCart ? [...JSON.parse(localStorage.shoppingCart)] : [];
 
 let totalShoppingCart = JSON.parse(localStorage.getItem("shoppingCart"));
 
@@ -105,11 +102,9 @@ function displayProducts(data) {
       localStorage.setItem("shoppingCart", JSON.stringify(shoppingCart));
       cartLogo.classList.add("animate");
 
-     
       setTimeout(() => {
         cartLogo.classList.remove("animate");
       }, 800);
-
 
       //För att hämta och skriva totalen
 
@@ -153,7 +148,8 @@ function displayProducts(data) {
       if (product.id == cardValue) {
         modalContent.classList.add("modal-content");
         modalContent.innerHTML = `
-        <h3>${product.title}</h3>
+        <img class="modal-image" src="${product.image}" alt="product image">
+        <h3 class="modal-title">${product.title}</h3>
             <p>${product.description}</p>
             <button class="close-modal">Close</button>
           `;
@@ -161,13 +157,14 @@ function displayProducts(data) {
       }
     });
 
-    body.addEventListener("click", function (event) {
+    modal.addEventListener("click", function (event) {
       if (event.target && event.target.closest(".close-modal")) {
         modal.classList.remove("modal-show");
         modalContent.innerHTML = "";
-      } else if (event.target && event.target.closest(".modal")) {
+      } else if (event.target === modal) {
         modal.classList.remove("modal-show");
         modalContent.innerHTML = "";
+        // Kommentar för att göra ny PR :)
       }
     });
   });
