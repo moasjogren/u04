@@ -164,6 +164,7 @@ function displayProducts(data) {
       } else if (event.target === modal) {
         modal.classList.remove("modal-show");
         modalContent.innerHTML = "";
+        // Kommentar för att göra ny PR :)
       }
     });
   });
