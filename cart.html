@@ -21,15 +21,19 @@
         <!-- Här behöver vi kanske lägga in lite klasser? -->
         <h3>Your order</h3>
         <p></p>
-        <div>
-          <p>Products</p>
-        </div>
-        <p>SUBTOTAL</p>
-        <img src="" alt="" />
-        <div>
-          <p>$100</p>
+        <p>Products</p>
+        <div id="final-cart">
+        <!-- Per grej i local storage -->
+          <div id="item" class="item">
+          <img class="product-img" src="" alt="">
+          <p class="title"></p>
+          <p id="price" class="price"></p>
+          <p class="amount"></p>
           <button>Remove Product</button>
         </div>
+
+      </div>
+
         <p>Subtotal</p>
         <p>$200</p>
         <div><p>Tax</p></div>

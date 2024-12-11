@@ -53,8 +53,13 @@ body {
 .cart-logo {
   width: 30px;
   height: 30px;
+ 
 }
 
+.animate {
+  transform: rotate(360deg) scale(1.3);
+  transition: transform 0.8s ease-in-out;
+}
 .aside {
   display: flex;
   justify-content: space-evenly;
