@@ -19,66 +19,65 @@ function displayShoppingCart() {
 
     
     
-//-------------för att göra nytt object med ammount--------//
-//     let parsedData = JSON.parse(data);
-//     const itemCount = {}
-//     parsedData.forEach(item => {
-//         if (itemCount[item.id]) {
-//             itemCount[item.id].count++;
-//           } else {
-//             itemCount[item.id] = { ...item, count: 1 };
-//           }
-//     })
-
-//     console.log(itemCount)
-//    const shoppingCartarray = Array(...Object.values(itemCount))
-//    shoppingCartarray.map((product) =>{
-//     const item = document.createElement("div");
-//     item.innerHTML = `${product.title} - ${product.price} X${product.count}` ;
-//     finalCart.appendChild(item);
-// });
-//------------------------------------------------------------//
-
-/*     let testCart = parsedData.filter((item, index) => {
-        if(parsedData.includes(item)) {
-            return parsedData.splice(index);
-        };
+ // -------------för att göra nytt object med ammount--------//
+    let parsedData = JSON.parse(data);
+    const itemCount = {}
+    parsedData.forEach(item => {
+        if (itemCount[item.id]) {
+            itemCount[item.id].count++;
+          } else {
+            itemCount[item.id] = { ...item, count: 1 };
+          }
     });
-        
-    console.log(testCart);
 
-    testCart.map((product) =>{
-        const item = document.createElement("div");
-        item.innerHTML = `${product.title} - ${product.price}` ;
+    console.log(itemCount);
+
+    const shoppingCartarray = Array(...Object.values(itemCount))
+    shoppingCartarray.map((product) =>{
+
+        let displayPrice = ``;
+
+        if (product.count == 1) {
+            displayPrice = `$${product.price}`;
+        } else if (product.count >= 2) {
+            displayPrice = `$${(product.price * product.count)} ($${product.price} /each)`;
+        };
+
+        const item = document.createElement("div"); 
+        item.innerHTML = `X${product.count} ${product.title} - ` + displayPrice;
         finalCart.appendChild(item);
-    }); */
+    });
 
-//     const products = JSON.parse(data);
+ // ------------------------------------------------------------//
 
-// const totatlPrice = products.reduce((acc, product) => acc + product.price,0)
-// console.log(totatlPrice)
-// const cart = products.
+    const products = JSON.parse(data);
 
-// reduce((acc, item) => {
-//   if (!acc.includes(item.title)) {
-//     acc.push(item.title);
-  
- 
-//   }
-//   return acc;
-// }, []);
+    const totatlPrice = products.reduce((acc, product) => acc + product.price,0)
+    console.log(totatlPrice)
+    const totalPrices = document.getElementById("total-price")
+    totalPrices.innerHTML = `$${totatlPrice}`
+    // const cart = products.
 
-// console.log(cart)
+    // reduce((acc, item) => {
+    //   if (!acc.includes(item.title)) {
+    //     acc.push(item.title);
+    
+    
+    //   }
+    //   return acc;
+    // }, []);
+
+    // console.log(cart)
 
 
-// cart.map((item) => {
-//  const test = document.createElement("div")
-//  test.innerHTML = `${item}`;
-//  finalCart.appendChild(test)
+    // cart.map((item) => {
+    //  const test = document.createElement("div")
+    //  test.innerHTML = `${item}`;
+    //  finalCart.appendChild(test)
 
-// })
+    // })
 
- }
+};
 // function removeDuplicates(array) {
 //     const filteredNumbers = array.filter((item, index) => array.indexOf(item) === index);
 //     return filteredNumbers;
