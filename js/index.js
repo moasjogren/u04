@@ -157,11 +157,11 @@ function displayProducts(data) {
       }
     });
 
-    body.addEventListener("click", function (event) {
+    modal.addEventListener("click", function (event) {
       if (event.target && event.target.closest(".close-modal")) {
         modal.classList.remove("modal-show");
         modalContent.innerHTML = "";
-      } else if (event.target && event.target.closest(".modal")) {
+      } else if (event.target === modal) {
         modal.classList.remove("modal-show");
         modalContent.innerHTML = "";
       }
