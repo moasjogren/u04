@@ -179,6 +179,13 @@ body {
   bottom: 0;
   right: 0;
   margin: 40px;
+}
+
+.back-to-top a {
+  text-decoration: none;
+  color: #11240b;
+  font-size: 30px;
+  font-weight: bold;
   padding: 10px 20px;
   border-radius: 50%;
   background-color: #c4e9a2;
@@ -187,15 +194,8 @@ body {
   transition: 0.3s;
 }
 
-.back-to-top:hover {
+.back-to-top a:hover {
   background-color: rgb(133, 215, 106);
-}
-
-.back-to-top a {
-  text-decoration: none;
-  color: #11240b;
-  font-size: 30px;
-  font-weight: bold;
 }
 
 .page-footer {
