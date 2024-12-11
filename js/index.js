@@ -15,8 +15,6 @@ const select = document.getElementById("select")
 let selectedValue = "";
 
 const priceRange = document.querySelector("#price-range");
-console.log(priceRange.value)
-
 const priceFilterDiv = document.getElementById('price-filter-div');
 const selectElement = document.getElementById('select');
 
@@ -30,8 +28,11 @@ cartCount.innerText = !localStorage.cartCount ? "Empty, Fucking buy something" :
 
 filterButton.addEventListener("click", function () {
   
-  // selectedValue = "";
-  selectElement.setAttribute('selected', true);
+  /* selectedValue = null; */
+  console.log("works", selectedValue)
+  
+    selectElement.removeAttribute('selected', true);
+    selectElement.setAttribute('selected', true);
 
   document.querySelectorAll("input").forEach((item) => {
     if (item.checked) {
