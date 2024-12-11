@@ -9,12 +9,16 @@ let cardValue;
 const modalContent = document.createElement("div");
 let cartCounter = 0;
 const cartCount = document.querySelector(".cart-counter");
+const cartLogo = document.querySelector(".cart-logo")
 
-const shoppingCart = localStorage.shoppingCart ? JSON.parse(...[localStorage.shoppingCart]): [];
+
+const shoppingCart = localStorage.shoppingCart
+  ? [...JSON.parse(localStorage.shoppingCart)]
+  : [];
 
 let totalShoppingCart = JSON.parse(localStorage.getItem("shoppingCart"));
 
-cartCount.innerText = localStorage.getItem("cartCount");
+cartCount.innerText = !localStorage.cartCount ? "Empty, Fucking buy something" : localStorage.getItem("cartCount");
 
 filterButton.addEventListener("click", function () {
   document.querySelectorAll("input").forEach((item) => {
@@ -99,6 +103,13 @@ function displayProducts(data) {
 
       shoppingCart.push(productInfo);
       localStorage.setItem("shoppingCart", JSON.stringify(shoppingCart));
+      cartLogo.classList.add("animate");
+
+     
+      setTimeout(() => {
+        cartLogo.classList.remove("animate");
+      }, 800);
+
 
       //För att hämta och skriva totalen
 
