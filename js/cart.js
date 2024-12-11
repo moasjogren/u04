@@ -16,10 +16,6 @@ placeOrder.addEventListener("click", function() {
 
 function displayShoppingCart() {
     finalCart.innerHTML = "";
-
-    
-    
- // -------------för att göra nytt object med ammount--------//
     let parsedData = JSON.parse(data);
     const itemCount = {}
     parsedData.forEach(item => {
@@ -28,10 +24,7 @@ function displayShoppingCart() {
           } else {
             itemCount[item.id] = { ...item, count: 1 };
           }
-    });
-
-    console.log(itemCount);
-
+    })
     const shoppingCartarray = Array(...Object.values(itemCount))
     shoppingCartarray.map((product) =>{
 
@@ -47,80 +40,19 @@ function displayShoppingCart() {
         item.innerHTML = `X${product.count} ${product.title} - ` + displayPrice;
         finalCart.appendChild(item);
     });
-
- // ------------------------------------------------------------//
-
     const products = JSON.parse(data);
-
     const totatlPrice = products.reduce((acc, product) => acc + product.price,0)
     console.log(totatlPrice)
     const totalPrices = document.getElementById("total-price")
     totalPrices.innerHTML = `$${totatlPrice}`
-    // const cart = products.
-
-    // reduce((acc, item) => {
-    //   if (!acc.includes(item.title)) {
-    //     acc.push(item.title);
-    
-    
-    //   }
-    //   return acc;
-    // }, []);
-
-    // console.log(cart)
-
-
-    // cart.map((item) => {
-    //  const test = document.createElement("div")
-    //  test.innerHTML = `${item}`;
-    //  finalCart.appendChild(test)
-
-    // })
-
 };
-// function removeDuplicates(array) {
-//     const filteredNumbers = array.filter((item, index) => array.indexOf(item) === index);
-//     return filteredNumbers;
-// }
-// function removeDuplicates(array) {
-//     return [...new Set(array)];
-// }
-
-
-
 displayShoppingCart();
 
 
+const products = JSON.parse(data);
 
+const totatlPrice = products.reduce((acc, product) => acc + product.price,0)
+console.log(totatlPrice)
+const totalPrices = document.getElementById("total-price")
+totalPrices.innerHTML = `$${totatlPrice}`
 
-
-
-
-
-// const cart = products.reduce((acc, item) => {
-//     if (acc.includes(item.id)) {
-    
-//       acc.push(item.id);
-
-//     }
-//     return acc;
-//   }, 0);
-  
-//   console.log(cart);
-
-// let testOne = []
-
-// let countProducts = 0;
-//   function howManyProducts() {
-//    products.forEach(id => {
-//         countProducts++;
-//         if(products.id === products.id){
-            
-//         testOne.push(products.id)
-//         }
-//    });
-
-//   } 
-// howManyProducts();
-//   console.log(countProducts)
-//   console.log(testOne)
