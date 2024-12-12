@@ -10,14 +10,20 @@ const modalContent = document.createElement("div");
 let cartCounter = 0;
 const cartCount = document.querySelector(".cart-counter");
 const cartLogo = document.querySelector(".cart-logo");
+let selectedValue = "";
+const priceRange = document.querySelector("#price-range");
+const priceFilterDiv = document.getElementById("price-filter-div");
+const selectElement = document.getElementById("select");
 
 const shoppingCart = localStorage.shoppingCart ? [...JSON.parse(localStorage.shoppingCart)] : [];
 
 let totalShoppingCart = JSON.parse(localStorage.getItem("shoppingCart"));
 
-cartCount.innerText = !localStorage.cartCount ? "Empty, Fucking buy something" : localStorage.getItem("cartCount");
+cartCount.innerText = !localStorage.cartCount ? "Empty! Fucking buy something!" : localStorage.getItem("cartCount");
 
 filterButton.addEventListener("click", function () {
+  selectElement.removeAttribute("selected", true);
+  selectElement.setAttribute("selected", true);
   document.querySelectorAll("input").forEach((item) => {
     if (item.checked) {
       filteredCategorys.push(item.value);
@@ -37,13 +43,13 @@ async function getProducts() {
 
     showAll = data.filter((obj) => filteredCategorys.includes(obj.category));
 
-    // return item.category.includes(filteredCategorys);
-
-    console.log(showAll);
     if (showAll.length !== 0) {
       displayProducts(showAll);
+      priceFilterDiv.style.display = "initial";
+      selectElement.setAttribute("selected", true);
     } else {
       displayProducts(data);
+      priceFilterDiv.style.display = "none";
     }
   } catch (error) {
     console.log(error);
@@ -81,11 +87,6 @@ function displayProducts(data) {
         (product) => product.id === Number(event.target.closest(".card").getAttribute("value"))
       );
 
-      // shoppingCart - tom array som ska  fyllas med objekt
-      // För varje 'add to cart' klick - skapa ett objekt med våra olika keys och pusha in i shoppingCart
-      // spara shoppingCart i localStorage
-      // ?
-
       const productInfo = {
         id: "",
         title: "",
@@ -106,35 +107,7 @@ function displayProducts(data) {
         cartLogo.classList.remove("animate");
       }, 800);
 
-      //För att hämta och skriva totalen
-
-      // const shoppingCart = Object.values(localStorage)
-
-      // const total = shoppingCart.reduce((acc, curr) => {
-      //   const prices = JSON.parse(curr)
-      // return acc + prices.price},0)
-      // console.log(total)
-      ///////////////////////////////////////////
-
-      // const totalPrice = JSON.parse(localStorage).reduce((acc, item) => {return acc + item.price},0 )
-
-      // let newString = JSON.stringify(valueArray)
-      // .replace(/[ [ () , "-]/g, " ")
-      // .replace("]", " ");
-      /*   localStorage.setItem(chosenCard[0].title, productInfo);
-      localStorage.setItem(chosenCard[0].price, productInfo); */
-      // data.map((product) => {
-      //   if (product.id == document.querySelector(".card").getAttribute("value")) {
-      //     localStorage.setItem(product.id, productInfo);
-      //   };
-
-      // });
-
-      //cartCounter++
-      //cartCount.innerHTML = cartCounter;
-
       totalShoppingCart = JSON.parse(localStorage.getItem("shoppingCart"));
-      console.log(totalShoppingCart.length);
 
       localStorage.setItem("cartCount", totalShoppingCart.length);
 
@@ -164,8 +137,19 @@ function displayProducts(data) {
       } else if (event.target === modal) {
         modal.classList.remove("modal-show");
         modalContent.innerHTML = "";
-        // Kommentar för att göra ny PR :)
       }
     });
   });
 }
+priceRange.addEventListener("change", () => {
+  selectedValue = priceRange.value;
+
+  const sorted = showAll.sort((a, b) => {
+    if (selectedValue === "low-to-high") {
+      return a.price - b.price;
+    } else if (selectedValue === "high-to-low") {
+      return b.price - a.price;
+    }
+  });
+  displayProducts(sorted);
+});
