@@ -14,6 +14,7 @@ let selectedValue = "";
 const priceRange = document.querySelector("#price-range");
 const priceFilterDiv = document.getElementById("price-filter-div");
 const selectElement = document.getElementById("select");
+let allData = [];
 
 const shoppingCart = localStorage.shoppingCart ? [...JSON.parse(localStorage.shoppingCart)] : [];
 
@@ -59,6 +60,7 @@ async function getProducts() {
 getProducts();
 
 function displayProducts(data) {
+  allData = data;
   mainContainer.innerHTML = "";
   filteredCategorys = [];
   data.map((product) => {
@@ -80,67 +82,69 @@ function displayProducts(data) {
   `;
     mainContainer.appendChild(card);
   });
-  mainContainer.addEventListener("click", function (event) {
-    const cardElement = event.target.closest(".card");
-    if (event.target.closest(".card-button")) {
-      const chosenCard = data.filter(
-        (product) => product.id === Number(event.target.closest(".card").getAttribute("value"))
-      );
-
-      const productInfo = {
-        id: "",
-        title: "",
-        image: "",
-        price: 0,
-      };
-
-      productInfo.id = chosenCard[0].id;
-      productInfo.title = chosenCard[0].title;
-      productInfo.image = chosenCard[0].image;
-      productInfo.price = chosenCard[0].price;
-
-      shoppingCart.push(productInfo);
-      localStorage.setItem("shoppingCart", JSON.stringify(shoppingCart));
-      cartLogo.classList.add("animate");
-
-      setTimeout(() => {
-        cartLogo.classList.remove("animate");
-      }, 800);
-
-      totalShoppingCart = JSON.parse(localStorage.getItem("shoppingCart"));
-
-      localStorage.setItem("cartCount", totalShoppingCart.length);
-
-      cartCount.innerText = localStorage.getItem("cartCount");
-    } else if (cardElement) {
-      modal.classList.add("modal-show");
-      cardValue = cardElement.getAttribute("value");
-    }
-
-    data.map((product) => {
-      if (product.id == cardValue) {
-        modalContent.classList.add("modal-content");
-        modalContent.innerHTML = `
-        <img class="modal-image" src="${product.image}" alt="product image">
-        <h3 class="modal-title">${product.title}</h3>
-            <p>${product.description}</p>
-            <button class="close-modal">Close</button>
-          `;
-        modal.appendChild(modalContent);
-      }
-    });
-
-    modal.addEventListener("click", function (event) {
-      if (event.target && event.target.closest(".close-modal")) {
-        modal.classList.remove("modal-show");
-        modalContent.innerHTML = "";
-      } else if (event.target === modal) {
-        modal.classList.remove("modal-show");
-        modalContent.innerHTML = "";
-      }
-    });
-  });
 }
+
+mainContainer.addEventListener("click", function (event) {
+  const cardElement = event.target.closest(".card");
+  if (event.target.closest(".card-button")) {
+    const chosenCard = allData.filter(
+      (product) => product.id === Number(event.target.closest(".card").getAttribute("value"))
+    );
+
+    const productInfo = {
+      id: "",
+      title: "",
+      image: "",
+      price: 0,
+    };
+
+    productInfo.id = chosenCard[0].id;
+    productInfo.title = chosenCard[0].title;
+    productInfo.image = chosenCard[0].image;
+    productInfo.price = chosenCard[0].price;
+
+    shoppingCart.push(productInfo);
+    localStorage.setItem("shoppingCart", JSON.stringify(shoppingCart));
+    cartLogo.classList.add("animate");
+
+    setTimeout(() => {
+      cartLogo.classList.remove("animate");
+    }, 800);
+
+    totalShoppingCart = JSON.parse(localStorage.getItem("shoppingCart"));
+
+    localStorage.setItem("cartCount", totalShoppingCart.length);
+
+    cartCount.innerText = localStorage.getItem("cartCount");
+  } else if (cardElement) {
+    modal.classList.add("modal-show");
+    cardValue = cardElement.getAttribute("value");
+  }
+
+  allData.map((product) => {
+    if (product.id == cardValue) {
+      modalContent.classList.add("modal-content");
+      modalContent.innerHTML = `
+      <img class="modal-image" src="${product.image}" alt="product image">
+      <h3 class="modal-title">${product.title}</h3>
+          <p>${product.description}</p>
+          <button class="close-modal">Close</button>
+        `;
+      modal.appendChild(modalContent);
+    }
+  });
+
+  modal.addEventListener("click", function (event) {
+    if (event.target && event.target.closest(".close-modal")) {
+      modal.classList.remove("modal-show");
+      modalContent.innerHTML = "";
+    } else if (event.target === modal) {
+      modal.classList.remove("modal-show");
+      modalContent.innerHTML = "";
+    }
+  });
+});
+
 priceRange.addEventListener("change", () => {
   selectedValue = priceRange.value;
 
