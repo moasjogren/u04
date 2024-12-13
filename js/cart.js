@@ -45,3 +45,5 @@ function displayShoppingCart() {
 }
 
 displayShoppingCart();
+
+// Kommentar för ny PR

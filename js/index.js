@@ -157,3 +157,5 @@ priceRange.addEventListener("change", () => {
   });
   displayProducts(sorted);
 });
+
+// Kommentar för att kunna göra ny PR
