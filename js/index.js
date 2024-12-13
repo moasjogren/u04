@@ -244,3 +244,5 @@ priceRange.addEventListener('change', () => {
   console.log(sorted);
   displayProducts(sorted);
 });
+
+// Kommentar för att kunna göra ny PR
