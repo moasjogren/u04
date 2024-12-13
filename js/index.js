@@ -9,36 +9,27 @@ let cardValue;
 const modalContent = document.createElement("div");
 let cartCounter = 0;
 const cartCount = document.querySelector(".cart-counter");
-const cartLogo = document.querySelector(".cart-logo")
-
+const cartLogo = document.querySelector(".cart-logo");
 let selectedValue = "";
-
 const priceRange = document.querySelector("#price-range");
-const priceFilterDiv = document.getElementById('price-filter-div');
-const selectElement = document.getElementById('select');
+const priceFilterDiv = document.getElementById("price-filter-div");
+const selectElement = document.getElementById("select");
+let allData = [];
 
-const shoppingCart = localStorage.shoppingCart
-  ? [...JSON.parse(localStorage.shoppingCart)]
-  : [];
+const shoppingCart = localStorage.shoppingCart ? [...JSON.parse(localStorage.shoppingCart)] : [];
 
 let totalShoppingCart = JSON.parse(localStorage.getItem("shoppingCart"));
 
-cartCount.innerText = !localStorage.cartCount ? "Empty, Fucking buy something" : localStorage.getItem("cartCount");
+cartCount.innerText = !localStorage.cartCount ? "Empty! Fucking buy something!" : localStorage.getItem("cartCount");
 
 filterButton.addEventListener("click", function () {
-  
-  /* selectedValue = null; */
-  console.log("works", selectedValue)
-  
-    selectElement.removeAttribute('selected', true);
-    selectElement.setAttribute('selected', true);
-
+  selectElement.removeAttribute("selected", true);
+  selectElement.setAttribute("selected", true);
   document.querySelectorAll("input").forEach((item) => {
     if (item.checked) {
       filteredCategorys.push(item.value);
     }
   });
-
   getProducts();
 });
 
@@ -53,18 +44,13 @@ async function getProducts() {
 
     showAll = data.filter((obj) => filteredCategorys.includes(obj.category));
 
-    // return item.category.includes(filteredCategorys);
-
-
     if (showAll.length !== 0) {
       displayProducts(showAll);
       priceFilterDiv.style.display = "initial";
-      selectElement.setAttribute('selected', true);
-
+      selectElement.setAttribute("selected", true);
     } else {
       displayProducts(data);
       priceFilterDiv.style.display = "none";
-
     }
   } catch (error) {
     console.log(error);
@@ -74,6 +60,7 @@ async function getProducts() {
 getProducts();
 
 function displayProducts(data) {
+  allData = data;
   mainContainer.innerHTML = "";
   filteredCategorys = [];
   data.map((product) => {
@@ -95,154 +82,78 @@ function displayProducts(data) {
   `;
     mainContainer.appendChild(card);
   });
-  mainContainer.addEventListener("click", function (event) {
-    const cardElement = event.target.closest(".card");
-    if (event.target.closest(".card-button")) {
-      const chosenCard = data.filter(
-        (product) => product.id === Number(event.target.closest(".card").getAttribute("value"))
-      );
+}
 
-      const productInfo = {
-        id: "",
-        title: "",
-        image: "",
-        price: 0,
-      };
+mainContainer.addEventListener("click", function (event) {
+  const cardElement = event.target.closest(".card");
+  if (event.target.closest(".card-button")) {
+    const chosenCard = allData.filter(
+      (product) => product.id === Number(event.target.closest(".card").getAttribute("value"))
+    );
 
-      productInfo.id = chosenCard[0].id;
-      productInfo.title = chosenCard[0].title;
-      productInfo.image = chosenCard[0].image;
-      productInfo.price = chosenCard[0].price;
-
-      shoppingCart.push(productInfo);
-      localStorage.setItem("shoppingCart", JSON.stringify(shoppingCart));
-      cartLogo.classList.add("animate");
-
-     
-      setTimeout(() => {
-        cartLogo.classList.remove("animate");
-      }, 800);
-
-      // const priceRange = document.querySelector("#price-range");
-      // console.log(priceRange.value)
-
-      // priceRange.addEventListener('change', () => {
-      //   console.log('click');
-      // });
-      // Sortera efter pris
-
-
-      // const compare = sortSelect.value === "newest" 
-      // ? (a,b) => new Date(b.paymentDue) - new Date(a.paymentDue) 
-      // : (a,b) => new Date(a.paymentDue) - new Date(b.paymentDue)
-      
-      //För att hämta och skriva totalen
-
-      // const shoppingCart = Object.values(localStorage)
-
-      // const total = shoppingCart.reduce((acc, curr) => {
-      //   const prices = JSON.parse(curr)
-      // return acc + prices.price},0)
-      // console.log(total)
-      ///////////////////////////////////////////
-
-      // const totalPrice = JSON.parse(localStorage).reduce((acc, item) => {return acc + item.price},0 )
-
-      // let newString = JSON.stringify(valueArray)
-      // .replace(/[ [ () , "-]/g, " ")
-      // .replace("]", " ");
-      /*   localStorage.setItem(chosenCard[0].title, productInfo);
-      localStorage.setItem(chosenCard[0].price, productInfo); */
-      // data.map((product) => {
-      //   if (product.id == document.querySelector(".card").getAttribute("value")) {
-      //     localStorage.setItem(product.id, productInfo);
-      //   };
-
-      // });
-
-      //cartCounter++
-      //cartCount.innerHTML = cartCounter;
-
-      totalShoppingCart = JSON.parse(localStorage.getItem("shoppingCart"));
-      console.log(totalShoppingCart.length);
-
-      localStorage.setItem("cartCount", totalShoppingCart.length);
-
-      cartCount.innerText = localStorage.getItem("cartCount");
-    } else if (cardElement) {
-      modal.classList.add("modal-show");
-      cardValue = cardElement.getAttribute("value");
-    }
-
-    data.map((product) => {
-      if (product.id == cardValue) {
-        modalContent.classList.add("modal-content");
-        modalContent.innerHTML = `
-        <h3>${product.title}</h3>
-            <p>${product.description}</p>
-            <button class="close-modal">Close</button>
-          `;
-        modal.appendChild(modalContent);
-      }
-    });
-
-    body.addEventListener("click", function (event) {
-      if (event.target && event.target.closest(".close-modal")) {
-        modal.classList.remove("modal-show");
-        modalContent.innerHTML = "";
-      } else if (event.target && event.target.closest(".modal")) {
-        modal.classList.remove("modal-show");
-        modalContent.innerHTML = "";
-      }
-    });
-  });
-  
-  
-/* 
-  priceRange.addEventListener('change', () => {
-    selectedValue = priceRange.value;
-    console.log(selectedValue)
-    
-    let sorted = [];
-
-    if(showAll.length = 0) {
-      sorted = data.sort((a, b) => {
-        if(selectedValue === "low-to-high") {
-          return a.price - b.price
-        } else if(selectedValue === "high-to-low") {
-          return b.price - a.price
-        }
-      });
-    } else {
-      sorted = showAll.sort((a, b) => {
-        if(selectedValue === "low-to-high") {
-          return a.price - b.price
-        } else if(selectedValue === "high-to-low") {
-          return b.price - a.price
-        }
-      });
-    }
-  
-    displayProducts(sorted);
-  }); */
-
-  
-};
-
-
-priceRange.addEventListener('change', () => {
-  selectedValue = priceRange.value;
-  console.log(selectedValue)
-  
-  const sorted = showAll.sort((a, b) => {
-    if(selectedValue === "low-to-high") {
-      return a.price - b.price
-    } else if(selectedValue === "high-to-low") {
-      return b.price - a.price
+    const productInfo = {
+      id: "",
+      title: "",
+      image: "",
+      price: 0,
     };
+
+    productInfo.id = chosenCard[0].id;
+    productInfo.title = chosenCard[0].title;
+    productInfo.image = chosenCard[0].image;
+    productInfo.price = chosenCard[0].price;
+
+    shoppingCart.push(productInfo);
+    localStorage.setItem("shoppingCart", JSON.stringify(shoppingCart));
+    cartLogo.classList.add("animate");
+
+    setTimeout(() => {
+      cartLogo.classList.remove("animate");
+    }, 800);
+
+    totalShoppingCart = JSON.parse(localStorage.getItem("shoppingCart"));
+
+    localStorage.setItem("cartCount", totalShoppingCart.length);
+
+    cartCount.innerText = localStorage.getItem("cartCount");
+  } else if (cardElement) {
+    modal.classList.add("modal-show");
+    cardValue = cardElement.getAttribute("value");
+  }
+
+  allData.map((product) => {
+    if (product.id == cardValue) {
+      modalContent.classList.add("modal-content");
+      modalContent.innerHTML = `
+      <img class="modal-image" src="${product.image}" alt="product image">
+      <h3 class="modal-title">${product.title}</h3>
+          <p>${product.description}</p>
+          <button class="close-modal">Close</button>
+        `;
+      modal.appendChild(modalContent);
+    }
   });
-  console.log(sorted);
-  displayProducts(sorted);
+
+  modal.addEventListener("click", function (event) {
+    if (event.target && event.target.closest(".close-modal")) {
+      modal.classList.remove("modal-show");
+      modalContent.innerHTML = "";
+    } else if (event.target === modal) {
+      modal.classList.remove("modal-show");
+      modalContent.innerHTML = "";
+    }
+  });
 });
 
-// Kommentar för att kunna göra ny PR
+priceRange.addEventListener("change", () => {
+  selectedValue = priceRange.value;
+
+  const sorted = showAll.sort((a, b) => {
+    if (selectedValue === "low-to-high") {
+      return a.price - b.price;
+    } else if (selectedValue === "high-to-low") {
+      return b.price - a.price;
+    }
+  });
+  displayProducts(sorted);
+});
