@@ -19,10 +19,14 @@ body {
 
 .header {
   display: flex;
+  position: sticky;
+  top: 0;
   width: 100%;
   justify-content: space-between;
   align-items: center;
   background-image: linear-gradient(60deg, #67d742, #85d76a, #c4e9a2);
+  z-index: 1;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
 }
 
 .header-logo {

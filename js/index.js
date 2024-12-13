@@ -20,7 +20,7 @@ const shoppingCart = localStorage.shoppingCart ? [...JSON.parse(localStorage.sho
 
 let totalShoppingCart = JSON.parse(localStorage.getItem("shoppingCart"));
 
-cartCount.innerText = !localStorage.cartCount ? "Empty! Fucking buy something!" : localStorage.getItem("cartCount");
+cartCount.innerText = !localStorage.cartCount ? "0" : localStorage.getItem("cartCount");
 
 filterButton.addEventListener("click", function () {
   selectElement.removeAttribute("selected", true);
