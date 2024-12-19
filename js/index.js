@@ -121,7 +121,7 @@ mainContainer.addEventListener("click", function (event) {
     modal.classList.add("modal-show");
     cardValue = cardElement.getAttribute("value");
 
-    gtag('event', 'button_click', {
+    gtag('event', 'card_click', {
       'event_category': 'card',
       'event_label': cardValue,
       'value': 1,
