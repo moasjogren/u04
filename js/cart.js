@@ -10,6 +10,13 @@ const clearCartBtn = document.getElementById("clear-cart-btn");
 
 placeOrder.addEventListener("click", function () {
   checkoutMessage.textContent = "Thank you for your purchase! Please buy more next time :) ";
+
+  gtag('event', 'button_click', {
+    'event_category': 'checkout',
+    'event_label': 'checkout-btn-clicks',
+    'value': 1,
+    'debug_mode': true
+  });
 });
 
 function displayShoppingCart() {
