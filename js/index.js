@@ -116,9 +116,17 @@ mainContainer.addEventListener("click", function (event) {
     localStorage.setItem("cartCount", totalShoppingCart.length);
 
     cartCount.innerText = localStorage.getItem("cartCount");
+
   } else if (cardElement) {
     modal.classList.add("modal-show");
     cardValue = cardElement.getAttribute("value");
+
+    gtag('event', 'button_click', {
+      'event_category': 'card',
+      'event_label': cardValue,
+      'value': 1,
+      'debug_mode': true
+    });
   }
 
   allData.map((product) => {
@@ -142,6 +150,7 @@ mainContainer.addEventListener("click", function (event) {
       modal.classList.remove("modal-show");
       modalContent.innerHTML = "";
     }
+    
   });
 });
 
@@ -156,4 +165,20 @@ priceRange.addEventListener("change", () => {
     }
   });
   displayProducts(sorted);
+});
+
+window.addEventListener('scroll', function() {
+  let scrollThreshold = window.innerHeight * 0.5;
+  let scrollPosition = window.scrollY;
+
+  if (scrollPosition > scrollThreshold) {
+  
+    gtag('event', 'scroll_event', {
+      'event_category': 'scroll-behavior',
+      'event_label': 'main-page-scroll',
+      'value': 1,
+      'debug_mode': true
+    });
+    
+  }
 });
